@@ -1,0 +1,31 @@
+# Virtual environment
+venv/
+env/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.pyc
+*.pyo
+__pycache__/
+
+# Compiled Python files
+*.pyc
+*.pyo
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Log files
+*.log
+
+# Local environment variables
+.env.local
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Editor-specific files
+*.swp
