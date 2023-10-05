@@ -1,9 +1,9 @@
 import os
 from flask import Flask, send_from_directory
 
-from routes.auth import auth
-from config.config import PORT, FRONTENED_PATH, FRONTENED_DEPENDENCIES, STATIC_FILES_PATH
-from modules.error_handler import handle_error_response
+from backend.routes.auth import auth
+from backend.config.config import PORT, FRONTENED_PATH, FRONTENED_DEPENDENCIES, STATIC_FILES_PATH
+from backend.modules.error_handler import handle_error_response
 
 # build and install frontend dependencies
 
