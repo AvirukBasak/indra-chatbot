@@ -1,4 +1,4 @@
-# Indra Chatbot Backend
+# Indra Chatbot
 - Auth API
   - Auth for frontend at `/auth`
 - Chat room API
