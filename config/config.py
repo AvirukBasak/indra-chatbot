@@ -4,6 +4,10 @@ from dotenv import load_dotenv
 # Load environment variables from .env and .env.local files
 load_dotenv('.env', '.env.local')
 
+FRONTENED_PATH = 'frontend'
+FRONTENED_DEPENDENCIES = 'frontend/node_modules'
+STATIC_FILES_PATH = 'static'
+
 MONGODB_URI = os.getenv('MONGODB_URI')
 DATABASE_NAME = os.getenv('DATABASE_NAME')
 HASH_SALT_LENGTH = os.getenv('HASH_SALT_LENGTH')

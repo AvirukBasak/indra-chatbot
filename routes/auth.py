@@ -2,7 +2,7 @@ import uuid
 import bcrypt
 from flask import request, jsonify, Blueprint
 
-from modules.config import HASH_SALT_LENGTH
+from config.config import HASH_SALT_LENGTH
 from modules.database import db
 from modules.error_handler import error_codes, error_response
 
