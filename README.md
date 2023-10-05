@@ -9,6 +9,7 @@
   - Auth
   - Docs
 - RASA Link
+- React Frontend
 
 
 ## Gettig Started
