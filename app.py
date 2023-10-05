@@ -3,7 +3,7 @@ from flask import Flask, send_from_directory
 
 from backend.routes.auth import auth
 from backend.config.config import PORT, FRONTENED_PATH, FRONTENED_DEPENDENCIES, STATIC_FILES_PATH
-from errors.error_handler import handle_error_response
+from backend.errors.error_handler import handle_error_response
 
 # build and install frontend dependencies
 

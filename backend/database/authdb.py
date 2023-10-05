@@ -2,9 +2,9 @@ import uuid
 import bcrypt
 from flask import jsonify
 
-from config.config import HASH_SALT_LENGTH
-from database.init_mongodb import db
-from errors.error_handler import error_codes
+from backend.config.config import HASH_SALT_LENGTH
+from backend.database.init_mongodb import db
+from backend.errors.error_handler import error_codes
 
 
 def validate_request(data, required_fields):

@@ -1,10 +1,8 @@
 from flask import request, jsonify, Blueprint
-from errors.error_handler import error_codes, error_response
-import database.authdb as authdb
-
+from backend.errors.error_handler import error_codes, error_response
+import backend.database.authdb as authdb
 
 auth = Blueprint('auth', __name__)
-
 
 @auth.route('/auth', methods=['GET'])
 def auth_get():
