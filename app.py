@@ -2,6 +2,7 @@ import os
 from flask import Flask, send_from_directory
 
 from backend.routes.auth import auth
+from backend.routes.chat import chat
 from backend.config.config import PORT, FRONTENED_PATH, FRONTENED_DEPENDENCIES, STATIC_FILES_PATH
 from backend.errors.error_handler import handle_error_response
 
@@ -16,8 +17,11 @@ if not os.path.isdir(STATIC_FILES_PATH):
 
 app = Flask(__name__)
 
-# Register error handling decorator
+# Register route blueprints
 app.register_blueprint(auth)
+app.register_blueprint(chat)
+
+# Register error handling decorator
 app.register_error_handler(Exception, handle_error_response)
 
 # Set the static folder and URL path for serving frontend assets
