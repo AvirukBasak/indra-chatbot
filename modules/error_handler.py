@@ -15,7 +15,7 @@ error_codes = {
 
 
 def handle_error_response(e):
-    return jsonify({ 'message': str(e) }), e.code
+    return jsonify({ 'message': str(e) }), e.code if hasattr(e, 'code') else 500
 
 
 def error_response(func):

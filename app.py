@@ -26,8 +26,19 @@ app.static_url_path = f'/{STATIC_FILES_PATH}'
 
 # Serve index.html as the default page from the static folder
 @app.route('/')
-def index():
-    return send_from_directory(app.static_folder, 'index.html')
+def serve_index():
+    return send_from_directory(
+        directory = STATIC_FILES_PATH,
+        path = 'index.html'
+    )
+
+# Serve static files from the static folder
+@app.route('/<path:fpath>')
+def serve_static_file(fpath):
+    return send_from_directory(
+        directory = STATIC_FILES_PATH,
+        path = fpath
+    )
 
 if __name__ == '__main__':
     app.run(port=PORT)
