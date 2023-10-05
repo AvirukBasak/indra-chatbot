@@ -47,6 +47,6 @@ MONGODB_URI='mongodb://127.0.0.1:27017'
 
 ## API Documentation
 
-- [Auth](#auth)
-- [Chat](#chat)
-- [Rasa](#rasa)
+- [Auth](https://github.com/AvirukBasak/indra-chatbot/tree/main/backend/routes#auth)
+- [Chat](https://github.com/AvirukBasak/indra-chatbot/tree/main/backend/routes#chat)
+- [Rasa](https://github.com/AvirukBasak/indra-chatbot/tree/main/backend/routes#rasa)
