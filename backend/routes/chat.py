@@ -9,8 +9,8 @@ def chat_get():
     return jsonify({ 'message': 'GET not supported by /chat' }), 404
 
 
-@chat.route('/chat', methods=['POST'])
-@error_response
+# @chat.route('/chat', methods=['POST'])
+# @error_response
 # Create a chat api endpoint w/ following API schema
 # req: {
 #     'ftoken': 'auth-ftoken', (optional if none, assume anonymous and dont store any data)

@@ -14,37 +14,42 @@ def validate_request(data, required_fields):
     return None
 
 
+def create_or_update_user(email, passwd, btoken):
+    ftoken = str(uuid.uuid4())
+    if not btoken:
+        btoken = str(uuid.uuid4())
+        passwd_hash = bcrypt.hashpw(passwd.encode('utf-8'), bcrypt.gensalt(HASH_SALT_LENGTH))
+        db.auth.insert_one({'email': email, 'passwd': passwd_hash, 'btoken': btoken, 'ftoken': [ ftoken ]})
+    else:
+        db.auth.update_one({'btoken': btoken}, {'$push': {'ftoken': ftoken}})
+    return btoken, ftoken
+
+
 def authenticate_user(email, passwd):
     auth_data = db.auth.find_one({'email': email})
-    if not auth_data:
-        return None, None
 
-    passwd_matching = bcrypt.checkpw(passwd.encode('utf-8'),
-                                     str(auth_data.get('passwd', b'')).encode('utf-8'))
+    if not auth_data:
+        btoken, ftoken = create_or_update_user(email, passwd, None)
+        return btoken, ftoken
+
+    passwd_matching = bcrypt.checkpw(passwd.encode('utf-8'), auth_data.get('passwd'))
     if not passwd_matching:
         return None, None
 
-    return auth_data.get('btoken', str(uuid.uuid4())), auth_data
-
-
-def create_or_update_user(email, passwd, auth_data, btoken):
-    if not auth_data:
-        passwd_hash = bcrypt.hashpw(passwd.encode('utf-8'), bcrypt.gensalt(HASH_SALT_LENGTH))
-        db.auth.insert_one({'email': email, 'passwd': passwd_hash, 'btoken': btoken, 'ftoken': []})
-    else:
-        db.auth.update_one({'btoken': btoken}, {'$push': {'ftoken': str(uuid.uuid4())}})
+    btoken = auth_data.get('btoken')
+    return create_or_update_user(email, passwd, btoken)
 
 
 def handle_auth_request(data):
     email = data['email']
     passwd = data['passwd']
-    
-    btoken, auth_data = authenticate_user(email, passwd)
-    if not btoken:
+
+    btoken, ftoken = authenticate_user(email, passwd)
+
+    if not btoken and not ftoken:
         return jsonify({'code': error_codes['AUTH_INCORRECT_PASSWD']}), 401
 
-    create_or_update_user(email, passwd, auth_data, btoken)
-    return jsonify({'btoken': btoken, 'ftoken': str(uuid.uuid4())}), 200
+    return jsonify({'btoken': btoken, 'ftoken': ftoken}), 200
 
 
 def handle_verify_request(data):
